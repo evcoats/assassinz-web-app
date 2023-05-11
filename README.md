@@ -1,6 +1,3 @@
-# Cyclic Web App
-Cyclic: App for hosting large-scale live-action games
-
 #  Cyclic Web App
 Project for automating the moderation of large scale games of "Assassin"
 
