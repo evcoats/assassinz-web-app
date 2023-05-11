@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+{% load static %}
+<link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+{% if gameID and modName%}
+<img src = "{% static 'images/cycliclogo.svg' %}" class = "centered lesslargeimg">
+
+{% elif getToken %}
+<img src = "{% static 'images/cycliclogo.svg' %}" class = "centered lesslargeimg">
+
+{% else %}
+<img src = "{% static 'images/cycliclogo.svg' %}" class = "centered largeimg">
+
+{% endif %}
+<h1 class = "title text-centered"> CYCLIC <span class = "flame"> GAMES </span> </h1>
+
+<div class = "text-centered intro introSmallScale">
+  <a class = "introbutton noUnder" href = "{% url 'login' %}"> LOG IN </a> /
+  <a class = "introbutton noUnder" href = "{% url 'signup' %}"> SIGN UP </a> /
+  <a class = "introbutton noUnder"  href = "{% url 'intro' %}"> RULES </a>
+
+  {% if gameID and modName%}
+  <div class = "centered textDiv">
+    <h5>
+    <b>
+    To join <span class = "flame">{{ modName }}'s</span> game, log in or sign up
+    </b>
+  </h5>
+  </div>
+  {% endif %}
+
+  {% if getToken %}
+  <div class = "centered textDiv">
+    <h5>
+    <b>
+    Log in or sign up to recieve your discord code
+    </b>
+    </h5>
+  </div>
+  {% endif %}
+
+
+</div>
+
+</html>

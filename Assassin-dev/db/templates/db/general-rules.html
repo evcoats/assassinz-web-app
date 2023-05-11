@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body><div id="page-container">
+   <div id="content-wrap">  {% include "db/nav.html" with signedIn=signedIn user=user %}
+
+<div class = "centered textDiv">
+ <h1 class = "regHeader flame" >What is Assassin Live?</h1>
+ Welcome to Assassin Live! Assassin is a social, live-action game in which each player has a target to assassinate. Once a player assassinates their target, they will gain the target of the player they assassinated. This process continues until only one player remains, who will then be crowned the champion.
+<br>
+<br>
+ Assassin Live is an application to organize the play of this game. We realized that, especially with large games, it can be hard for a moderator to keep up with everything that is going on. For moderators, we offer lots of freedom and flexibility to fit most rulesets. However, if you don't have any special rules, the default ruleset works very well.
+<br>
+<br>
+ <b><a class = "green" target="_blank" href = "https://en.wikipedia.org/wiki/Assassin_(game)"> Here </a> </b> is the Wikipedia page for Assassin.
+
+<h1 class = "regHeader flame" >How can I play?</h1>
+<p>To play, {% if not user %} after you <b><a class = "green" href = "{% url 'login' %}">log in</a></b>,{% endif %} you can either <b><a class = "green" href = "{% url 'startGame' %}">start a game</a></b> and get your friends to join or <b><a class = "green" href = "{% url 'joinGame' %}">join an existing game</a></b>.
+  <br>
+  <br>
+If you start a game, you will be moderating the game for your friends, where you will be able to view all of the player’s targets and moderate disputes. Moderating can be just as fun as playing!
+<br>
+<br>
+If you join a game, you will be entered as a regular player.
+</p>
+<h1 class = "regHeader flame">What are the rules?</h1>
+
+<br>
+<b>
+<a href = "{% url 'index'%}" class = "text-centered green"> View the rules from games you are already entered into</a>
+</b>
+<br>
+<br>
+Although the rules vary from game to game, and you have the ability to input the rules you would like, the core rules include:
+
+<br>
+<br>
+Each player has a target to assassinate. Once a player assassinates their target, they gain the target of the player they assassinated. This process continues until only one player remains, who will then be crowned the champion.
+<br>
+How to assassinate a player:
+<br>
+<ul>
+<li> (Your kill method here) </li>
+<li>Go to the game page and click “Confirm Kill”</li>
+<li>The player you assassinated should now go to the game page and click “Confirm Death”</li>
+<li>If both players confirm, you will gain the player you assassinated’s target!</li>
+</ul>
+
+You can’t assassinate a player when:
+<ul>
+<li> (Your safety circumstances / witness protection rules here) </li>
+</ul>
+If your target is not agreeing to confirm their death:
+<ul>
+<li> Go to the game page and click “Dispute / Contact Moderator” </li>
+<li> Provide the moderator with all of the information surrounding the problem and the moderator will make a decision </li>
+</ul>
+Additionally:
+<ul>
+<li> (Your additional rules here) </li>
+<li> Refrain from illegal activities and suspicious-looking activities in your hunt. </li>
+<ul>
+  </div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div></body>
+</html>

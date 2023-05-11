@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body><div id="page-container">
+   <div id="content-wrap">  {% include "db/nav.html" with signedIn=signedIn %}
+
+
+  {% csrf_token %}
+
+<span class = "regHeader centered">Discord Code: <span class = "flame"> {{discord_code}} 
+  <script> 
+  $(".newWeak").first().click(function() {
+    navigator.clipboard.writeText( "{{discord_code}}")
+  })
+  </script>
+ </span><br>
+ <button class = "newWeak"> Copy code <img src = "{% static 'images/clip-board.png' %}" class = "icon"> </button>
+ <span class = "centered-text signuplink"> Please submit your code to the discord bot </span>
+
+</div>
+
+<script> 
+  $(".newWeak").first().click(function() {
+    navigator.clipboard.writeText( "{{discord_code}}")
+  })
+  </script>
+
+{% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

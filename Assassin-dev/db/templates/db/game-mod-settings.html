@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+  <script src="{% static 'js/input.js'%}"></script>
+
+
+<body><div id="page-container">
+   <div id="content-wrap">  {% include "db/nav.html" with signedIn=signedIn user=user %}
+
+  <h2 class = "gameheader">Game {{gameString}}: <span class = "flame">Settings</span></h2>
+  <div class = "centered standout">
+  <button class = "new text-centered" id = "defaultSettings">Use Default Settings</button>
+  <button class = "new text-centered" onclick = "window.location.href = '{% url 'faq'%}' ">FAQ</button>
+  </div>
+
+
+<form action="{% url 'gameSettingsPost' gameID=gameID %}" method = "POST" class = "text-centered joingame">
+  {% csrf_token %}
+  <hr>
+  <h3 class = "flame" >Is an assassination invalid if a witness is present?<img id = "toggleWitTip" class = "info" src = "{%static 'images/info.png'%}"></img> </h3>
+  <div  class = "halfpage centered">
+  <p class = "hidden " id = "witTip">If one or more people (including non-players) other than the assassin and target see the assassination, then the assassination doesn't count. The assassin will have to try again.</p>
+  </div>
+    <input type="radio"  name="witnessprotection" id = "wityes" value="yes" {% if witnessProtection %} checked {% endif %}>
+    <label for="witnessprotectionyes">Yes </label>
+    <input type="radio" name="witnessprotection" value="no" {% if not witnessProtection %} checked {% endif %}>
+    <label for="witnessprotectionno">No</label><br>
+
+    <br>
+    <hr>
+
+    <h3 class = "flame">Is there a maximum number of players that can join? </h3>
+    <input type="radio"  name="limit" id = "limityes" value="yes" {% if limit > 0 %} checked {% endif %}>
+    <label for="witnessprotectionyes">Yes </label>
+    <input type="radio" name="limit" value="no" id = "limitno" {% if limit == 0 %} checked {% endif %}>
+    <label for="witnessprotectionno">No</label><br>
+    <br>
+    <div id = "hideLimitNum" {% if limit == 0 %}class = "hidden"{% endif%}>
+    <label for "limit">Limit: </label>
+    <input type = "number" name = "limitNum" id ="limitNum" {% if limit > 0 %} value = {{limit}} {% endif %}>
+  </div>
+
+    <br>
+    <hr>
+
+    <h3 class = "flame">When, where, and how can a player be protected from assassination? <img id = "toggleProtTip" class = "info" src = "{%static 'images/info.png'%}"></img></h3>
+    <div  class = "halfpage centered">
+    <p class = "hidden " id = "protTip">Protection can be an important part of the game to keep it fair, fun, and safe. You might want to consider asking the players when/where they want protection. Too much protection, however, drags the game on and makes it less fun. </p>
+    </div>
+
+
+    <div class = "entry">
+    <div class = "sub-entry">
+
+      <div class = "div-right">
+
+
+    <h5>Your safety rules (separate with commas)</h5>
+    <textarea type="textarea" id = "safetyCircs" rows="4" cols="30" name="safetyCircumstances">{{circumstances}}</textarea><br>
+  </div>
+
+  </div>
+
+    <div class = "sub-entry">
+
+    <table class = "table-left">
+      <tbody class = "centbody" align = "center">
+      <tr><td><h5>Suggested</h5></td>  </tr>
+
+      <tr><td><span class = "sugg">during class / work</span><span class = "green safetyAdd pointer"> Add </span> </td>  </tr>
+      <tr><td><span class = "sugg">while sleeping in bed</span><span class = "green safetyAdd pointer"> Add </span> </td> </tr>
+      <tr><td><span class = "sugg">while wearing a band on their arm</span><span class = "green safetyAdd pointer"> Add </span> </td></tr>
+    </tbody>
+    </table>
+  </div>
+
+  </div>
+
+  <hr>
+
+    <h3 class = "flame">How does a player assassinate their target? <img id = "toggleAssTip" class = "info" src = "{%static 'images/info.png'%}"></img> </h3>
+    <div  class = "halfpage centered">
+    <p class = "hidden " id = "assTip">Each player will have to complete the assassination method to assassinate their target (and then gain their target's target). A good assassination method is safe, simple, and fun.</p>
+  </div>
+    <!-- <h5>Use <span class = "light larger focused">KillCam</span><span class = "smaller">BETA</span>? (reccomended)</h5> -->
+    <!-- <div class = "centered halfpage">
+    <p class = "text-centered light">KillCam: Players take a video while completing the assassination method. Afterwards,
+      players upload their video to the site which will later be added into a compilation of videos. The compilation will be available to download and watch on the game page once the game is finished.
+    </p>
+  </div>
+    <input type="radio"  id = "killCamYes" name="killCam" value="yes" {% if killCam %} checked {% endif %}>
+    <label for="killCamYes">Yes </label>
+    <input type="radio" id = "killCamNo" name="killCam" value="no" {% if not killCam %} checked {% endif %}>
+    <label for="killCamNo">No </label> -->
+    <div class = "entry">
+  <div class = "sub-entry">
+    <div class = "div-right">
+    <h5>Your assassination method</h5>
+    <textarea type="textarea"  id = "killM" name="killmethod" rows="4" cols="30">{{killMethod}}</textarea><br>
+  </div>
+  </div>
+
+  <div class = "sub-entry">
+      <table class = "table-left">
+      <tbody class = "centbody">
+        <tr><td><h5>Suggested</h5> </td>  </tr>
+        <tr><td class = "tdSuggestion"><span class = "method">Touch a sock to your target</span><span class = "green killAdd pointer"> Add </a> </td> </tr>
+        <tr><td class = "tdSuggestion"><span class = "method">Shoot target with water gun</span><span class = "green killAdd pointer"> Add </a> </td> </tr>
+        <tr><td class = "tdSuggestion"><span class = "method">Get within five feet of target, and yell "bang"</span><span class = "green killAdd pointer"> Add </a></td></tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+
+    <h3 class = "flame">Are there any extra rules to add?</h3>
+    <input type="radio"  id = "extshow" name="extraRules" value="yes" {% if not extraRules == "" %} checked {% endif %}>
+    <label for="witnessprotectionyes">Yes </label>
+    <input type="radio" id = "exthide" name="extraRules" value="no" {% if extraRules == "" %} checked {% endif %}>
+    <label for="extraRules">No</label><br>
+    <label for="username"  class = "smallerHeader hidden extshow">Add any extra rules here as needed. (separate with commas)</label><br>
+    <textarea type="textarea" class = "{% if extraRules == "" %} hidden {% endif %} extshow" name="extrarules" id ="extext"rows="4" cols="50">{{extraRules}}</textarea>
+    <hr>
+    <h3 class = "flame">Moderator Contact Settings<img id = "toggleModTip" class = "info" src = "{%static 'images/info.png'%}"></img></h3>
+    <div  class = "halfpage centered">
+    <p class = "hidden " id = "modTip">As the moderator, players might want to contact you in order to dispute whether a kill is valid or not. You play an important role in making the game fun, so it is necessary for the players to contact you. </p>
+  </div>
+    <label for="email" >Allow players to contact your account email?</label>
+    <input type="checkbox" name="email" value="yes" id = "email" checked>
+    <br>
+    <label for="phone" >Phone number</label>
+    <input type = "text" name = "phone" value = "{{phone}}">
+    <br>
+    <label for="other" >Other ways to contact you</label>
+    <input type = "text" name = "other" value = "{{contactInfo}}">
+    <br>
+    <input type="submit" value="Save Game" class = "new">
+  </form>
+  </div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div></body>
+</html>
