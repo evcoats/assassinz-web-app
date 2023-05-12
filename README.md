@@ -11,4 +11,4 @@ Hosted at The Bishop's School and UIUC
 - Automated moderation (target shuffling, assassinations, points, leaderboard) 
 - "Town Hall" rule voting systems
 - Notification system
-- Game-to-game player profile
+- Maintained player profiles
