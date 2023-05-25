@@ -1,4 +1,4 @@
-#  Cyclic Web App
+#  Assassinz Web App
 Project for automating the moderation of large scale games of ["Assassin"](https://en.wikipedia.org/wiki/Assassin_(game))
 
 AWS Elastic Beanstalk, Django, JavaScript
@@ -8,7 +8,7 @@ AWS Elastic Beanstalk, Django, JavaScript
 Hosted at The Bishop's School and UIUC
 
 #  Includes:
-- Automated moderation (target shuffling, assassinations, points, leaderboard) 
+- Automated moderation (target randomization, assassinations, points, leaderboard) 
 - "Town Hall" rule voting systems
 - Notification system
 - Maintained player profiles
