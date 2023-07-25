@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+  <script src="{% static 'js/input.js'%}"></script>
+
+<body>
+  <div id="page-container">
+     <div id="content-wrap">
+  {% include "db/nav.html" with signedIn=signedIn user=user %}
+
+  <h1 class = "flame text-centered bold"> New Game Settings </h1>
+  <div class = "centered textDiv">
+    <h5 class = "text-centered">
+      You are now setting up a game for moderation by your account. Click the info button to learn more about a rule!  </h5>
+  </div>
+  {% if error_message %}
+  <p class ="text-centered"> {{ error_message }} </p>
+  {%endif%}
+  <div class = "centered standout">
+  <button class = "new text-centered" id = "defaultSettings">Use Default Settings</button>
+  <button class = "new text-centered" onclick = "window.location.href = '{% url 'intro'%}' ">Rules/Help</button>
+  </div>
+  <img id = "ninja2" class = "centered" src = "{% static 'images/circle.png'%}">
+
+<form action="{% url 'startGamePost' %}" method = "POST" class = "text-centered joingame">
+  {% csrf_token %}
+
+<hr>
+
+  <div  class = "halfpage centered">
+
+    <h3 class = "flame" >Game Name:</h3>
+    <input type = "text" name = "gameName">
+    </div>
+    <br>
+  <hr>
+  <h3 class = "flame" >Play with teams?<img id = "toggleTeamsTip" class = "info" src = "{%static 'images/info.png'%}"></img> </h3>
+  <div  class = "halfpage centered">
+  <p class = "hidden " id = "teamsTip">Players will either be randomly placed into teams or join based on a "team join code" as specified below.</p>
+  </div>
+  
+    <input type="radio"  name="teams" id = "teams" value="4">
+    <label for="teams">Teams of 4 </label>
+    <br>
+  
+    <input type="radio"  name="teams" id = "teams" value="3" checked>
+    <label for="teams">Teams of 3 </label>
+    <br>
+  
+    <input type="radio"  name="teams" id = "teams" value="2">
+    <label for="teams">Teams of 2 </label>
+    <br>
+  
+    <input type="radio" name="teams" id = "teams" value="1">
+    <label for="teams">No (Solo)</label>
+    <br>
+  
+    <input type="radio" name="teams" id = "teamsnum" value="custom">
+      <label for="teams">Custom Team Size</label>
+  
+    <br>
+    <br>
+
+  
+    <label for="customteamsize">Custom Team Size:</label><br>
+    <input type="number" name="customteamsize" value="customteamsize">
+    <br>
+  
+    <hr>
+  
+    <div id = "teamJoinMethod"> 
+    <h3 class = "flame" >Team Join Method<img id = "toggleTeamsTip2" class = "info" src = "{%static 'images/info.png'%}"></img> </h3>
+    <div  class = "halfpage centered">
+    <p class = "hidden " id = "teamsTip2">Players will either be randomly placed into teams or join based on a "team join code," which players and moderators will be able to see and share with their friends. You, as the moderator, can remove any player at any time. </p>
+    </div>
+    
+      <input type="radio"  name="teams2" id = "randomteams" value="2">
+      <label for="random">Random teams at game start </label>
+      <br>
+    
+      <input type="radio" name="teams2" id = "selectedteams" value="1">
+      <label for="code">Join by team code during setup</label><br>
+      <br>
+    
+  
+    </div>
+    <hr>
+
+    <h3 class = "flame">Is there a maximum number of players that can join? </h3>
+    <input type="radio"  name="limit" id = "limityes" value="yes">
+    <label for="witnessprotectionyes">Yes </label>
+    <input type="radio" name="limit" value="no" id = "limitno" checked>
+    <label for="witnessprotectionno">No</label><br>
+    <br>
+    <div id = "hideLimitNum" class = "hidden">
+    <label for "limit">Limit: </label>
+    <input type = "number" name = "limitNum" min = "2" max = "2000">
+    </div>
+  
+
+    <hr>
+
+    <h3 class = "flame">How does a player assassinate their target? <img id = "toggleAssTip" class = "info" src = "{%static 'images/info.png'%}"></img> </h3>
+    <div  class = "halfpage centered">
+    <p class = "hidden " id = "assTip">Each player will have to complete the assassination method to assassinate their target (and then gain their target's target). A good assassination method is safe, simple, and fun.</p>
+  </div>
+  <!--
+    <h5>Use <span class = "light larger focused">KillCam</span><span class = "smaller">BETA</span>? (reccomended)</h5>
+    <div class = "centered halfpage">
+    <p class = "text-centered light">KillCam: Players take a video while completing the assassination method. Afterwards,
+      players upload their video to the site which will later be added into a compilation of videos. The compilation will be available to download and watch on the game page once the game is finished.
+    </p> -->
+  <!-- </div> -->
+    <!-- <input type="radio"  id = "killCamYes" name="killCam" value="yes">
+    <label for="witnessprotectionyes">Yes </label>
+    <input type="radio" id = "killCamNo" name="killCam" value="no" checked>
+    <label for="witnessprotectionyes">No </label>
+  -->
+  <div class = "entry">
+  <div class = "sub-entry">
+    <div class = "div-right">
+    <h5>Your assassination methods (seperate with commas)</h5>
+    <textarea type="textarea"  id = "killM" name="killmethod" rows="4" cols="30"></textarea><br>
+  </div>
+  </div>
+  
+  <div class = "sub-entry">
+      <table class = "table-left">
+      <tbody class = "centbody">
+        <tr><td><h5>Suggested</h5> </td>  </tr>
+        <tr><td class = "tdSuggestion"><span class = "method">Shoot target with water gun</span><span class = "green killAdd pointer"> Add </a> </td> </tr>
+        <tr><td class = "tdSuggestion"><span class = "method">Two players challenge eachother to a duel with rules of their choosing</span><span class = "green killAdd pointer"> Add </a></td></tr>
+        <tr><td class = "tdSuggestion"><span class = "method">Get within X feet of target, and yell "X"</span><span class = "green killAdd pointer"> Add </a></td></tr>
+        <tr><td class = "tdSuggestion"><span class = "method">When X number of players remain, start a deathmatch with rules of the players choosing</span><span class = "green killAdd pointer"> Add </a></td></tr>
+  
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+<h3 class = "flame" >Is an assassination invalid if a witness is present?<img id = "toggleWitTip" class = "info" src = "{%static 'images/info.png'%}"></img> </h3>
+<div  class = "halfpage centered">
+<p class = "hidden " id = "witTip">If one
+   or more people (including non-players) other than the assassin and target see the assassination, then the assassination doesn't count. The assassin will have to try again.</p>
+</div>
+  <input type="radio"  name="witnessprotection" id = "wityes" value="yes" checked>
+  <label for="witnessprotectionyes">Yes </label>
+  <input type="radio" name="witnessprotection" value="no">
+  <label for="witnessprotectionno">No</label><br>
+
+  <br>
+
+
+  <br>
+  <hr>
+
+  <h3 class = "flame">When, where, and how can a player be protected from assassination? <img id = "toggleProtTip" class = "info" src = "{%static 'images/info.png'%}"></img></h3>
+  <div  class = "halfpage centered">
+  <p class = "hidden " id = "protTip">Protection can be an important part of the game to keep it fair, fun, and safe. You might want to consider asking the players when/where they want protection. Too much protection, however, drags the game on and makes it less fun. </p>
+  </div>
+
+  <div class = "entry">
+  <div class = "sub-entry">
+
+    <div class = "div-right">
+
+
+  <h5>Your safety rules (separate with commas)</h5>
+  <textarea type="textarea" id = "safetyCircs" rows="4" cols="30" name="safetyCircumstances"></textarea><br>
+</div>
+
+</div>
+
+  <div class = "sub-entry">
+
+  <table class = "table-left">
+    <tbody class = "centbody" align = "center">
+    <tr><td><h5>Suggested</h5></td>  </tr>
+
+    <tr><td><span class = "sugg">during class / work</span><span class = "green safetyAdd pointer"> Add </span> </td>  </tr>
+    <tr><td><span class = "sugg">while sleeping in bed</span><span class = "green safetyAdd pointer"> Add </span> </td> </tr>
+    <tr><td><span class = "sugg">while wearing an "ASSASSINZ PLAYER" band on their wrist</span><span class = "green safetyAdd pointer"> Add </span> </td></tr>
+  </tbody>
+  </table>
+</div>
+
+</div>
+
+
+<hr>
+
+  <h3 class = "flame">Are there any extra rules to add?</h3>
+  <input type="radio"  id = "extshow" name="extraRules" value="yes">
+  <label for="witnessprotectionyes">Yes </label>
+  <input type="radio" id = "exthide" name="extraRules" value="no" checked>
+  <label for="extraRules">No</label><br>
+  <label for="username"  class = "smallerHeader hidden extshow">Add any extra rules here as needed. (separate with commas)</label><br>
+  <textarea type="textarea" class = "hidden extshow" name="extrarules" id ="extext"rows="4" cols="50"></textarea>
+  <hr>
+  <h3 class = "flame">Moderator Contact Settings<img id = "toggleModTip" class = "info" src = "{%static 'images/info.png'%}"></img></h3>
+  <div  class = "halfpage centered">
+  <p class = "hidden " id = "modTip">As the moderator, players might want to contact you in order to dispute whether a kill is valid or not. You play an important role in making the game fun, so it is necessary for the players to contact you. </p>
+</div>
+  <label for="email" >Allow players to contact your account email?</label>
+  <input type="checkbox" name="email" value="yes" id = "email" checked>
+  <br>
+  <label for="phone" >Phone number</label>
+  <input type = "text" name = "phone">
+  <br>
+  <label for="other" >Other ways to contact you</label>
+  <input type = "text" name = "other">
+  <br>
+  <input type="submit" value="Start Game Setup Phase" class = "new">
+
+
+
+</form>
+</div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

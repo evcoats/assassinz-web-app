@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<meta http-equiv="refresh" content="480">
+
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body><div id="page-container">
+   <div id="content-wrap">  {% include "db/nav.html" with signedIn=signedIn user=user %}
+     {% if error_message %}
+     <p class ="regHeader flame"> {{ error_message }} </p>
+     {%endif%}
+
+<h2 class = "gameheader">Game {{gameString}}: <span class = "green">Live</span></h2>
+<h1 class = "regHeader">What would you like to do, Moderator?</h1>
+
+<div class = "centered standout">
+  <button class = "new" onclick = '$("html,body").animate({scrollTop: $("#rulesetScroll").offset().top})'>View Rules</button>
+  <button class = "new" onclick = '$("html,body").animate({scrollTop: $("#leaderboardScroll").offset().top})'>Complete Player's Kill Assignment</button>
+  <button class = "new" onclick = '$("html,body").animate({scrollTop: $("#leaderboardScroll").offset().top})'> Reverse Player's Death</button>
+  <button class = "new" onclick = "window.location.href='{% url 'gameSettings' gameID=gameID %}'">Change Settings</button>
+  <button class = "new" onclick = "window.location.href='{% url 'randomizeTargets' gameID=gameID %}'">Randomize Targets</button>
+  <button class = "new" onclick = "window.location.href='{% url 'duelSubmission' gameID=gameID %}'">Submit Duel</button>
+
+
+  <button class = "new">Moderator Help</button>
+</div>
+<hr>
+<h1 class = "regHeader leaderboard" id = 'leaderboardScroll'>Leaderboard <img class = "icon" src = "{% static 'images/leaderboard.png' %}"> </h1>
+<div class = "scroll">
+
+<table class = "playerTable" style="width:75%">
+  <tr>
+    {% if teams > 1 %}
+    
+    <th>Team</th>
+    {% endif %}
+    <th>Player</th>
+    <th>Kills</th>
+    <th>Alive?</th>
+    <th>Assignment</th>
+    <th>Score</th>
+
+
+  </tr>
+  <tr>
+    {% if players %}
+    {% for x in players %}
+
+    <tr>
+      {% if teams > 1 %}
+      <td><span class = larger>{{x.10}}<span></td>
+      {% endif %}
+
+      <td><span class = larger><a href = "{% url 'profile' userID=x.1.0 %}">{{ x.0 }}</a><span></td>
+      
+      <td><span class = larger>{{x.2}}<span></td>
+      <td><span class = larger>{{x.3}}{% if not x.6 %}<a class = "larger flame" href = {% url 'modReverseDeath' gameID=id assassinPlayerID=x.8 assassinatedPlayerID=x.1.1%}> [Reverse Death]</a>{% endif %}<span></td>
+
+      {% if x.3 == "Yes"%}
+      <td><span class = larger><a href = "{% url 'profile' userID=x.4 %}">{{ x.5 }}</a>{%if x.6%}<a class = "larger flame" href = {% url 'modKill' gameID=id assassinPlayerID=x.1.1 assassinatedPlayerID=x.7 %}> [Complete Assignment]</a> {% endif %}<span></td>
+
+      {% else %}
+      <td><span class = larger>None<span></td>
+
+      {% endif %}
+
+      <td><span class = larger>{{x.9.0}}<span></td>
+
+    </tr>
+
+    {%  endfor %}
+    {% else %}
+    <td><span class = "larger">None</span></td>
+    <td><span class = "larger">None</span></td>
+    <td><span class = "larger">None</span></td>
+    <td><span class = "larger">None</span></td>
+
+    {% endif %}
+
+</table>
+</div>
+<hr>
+{% include "db/ruleset.html" with extraRules=extraRules killMethod=killMethod safety=safety safetyCircumstances=safetyCircumstances killMethod=killMethod witnessProtection=witnessProtection%}
+</div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

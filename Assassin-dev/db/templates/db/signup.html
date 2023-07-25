@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body>
+  <div id="page-container">
+     <div id="content-wrap">
+  {% include "db/nav.html" with signedIn=signedIn user=user %}
+
+<form action="{% url 'signuppost'%}" method = "post" class = "text-centered joingame">
+  {% csrf_token %}
+  <label for="username" class = "smallerHeader">Email:</label><br>
+  <input type="text" id="Email" name="email"><br>
+  <label for="username" class = "smallerHeader">Username:</label><br>
+  <input type="text" id="username" name="username"><br>
+  <label for="username" class = "smallerHeader">Full Name:</label>
+  <p>(So your assassin can identify you)</p>
+  <input type="text" id="fullName" name="fullName"><br>
+
+  <label for="password" class = "smallerHeader">Password:</label><br>
+  <input type="password" id="password" name="password"><br>
+  <label for="password" class = "smallerHeader">Repeat Password:</label><br>
+  <input type="password" id="repeatpassword" name="repeatpassword"><br>
+
+  <input type="checkbox" id="termsconditions" name="termsconditions" value="termsconditions">
+
+  <label for="termsconditions"> I agree to the <a href = "{% url 'termsConditions' %}" class = "green"> terms and conditions </a></label><br>
+
+  <input type="submit" value="Sign Up" class = "new">
+  <br>
+
+</form>
+{% if error_message %}
+<p class ="text-centered"> {{ error_message }} </p>
+{%endif%}
+
+<span class = "centered-text signuplink"> Already signed up? <a class = "centered-text green" href = "{% url 'login'%}">Login<a></span>
+</div>
+  {% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

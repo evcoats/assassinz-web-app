@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body><div id="page-container">
+   <div id="content-wrap">
+<div id="page-container">
+ <div id="content-wrap">
+  {% include "db/nav.html" with signedIn=signedIn user=user %}
+
+
+<h2 class = "gameheader">Game {{gameString}}: <span class = "green">Finished</span></h2>
+{% if mod and comp and link and killCam%}
+<h2 class = "regHeader">Compilation Ready! <a href = "{{link}}" class = "new">Download it here <img class = "icon" src = "{% static 'images/video.png'%}"></a></h2>
+
+{% elif mod and killCam %}
+<h2 class = "regHeader">Compilation Processing...</h2>
+
+{% endif %}
+
+
+
+
+<div class = "centered standout">
+  <button class = "new" onclick = '$("html,body").animate({scrollTop: $("#rulesetScroll").offset().top})'>View This Game's Rules</button>
+</div>
+<div class = "centered-text assignmentContainer">
+<div id = "assignment">
+<img src = "{% static 'images/champ.png'%}" class = "lgicon">
+<h1 class = "regHeader flame">Champion</h1>
+<h2 class = "centered-text"><a href = "{% url 'profile' userID=champUserID %}">{{champUsername}}</a></h2>
+</div>
+</div>
+<hr>
+<h1 class = "regHeader leaderboard">Leaderboard <img class = "icon" src = "{% static 'images/leaderboard.png'%}"> </h1>
+<div class = "scroll">
+
+<table class = "playerTable" style="width:75%" >
+  <tr>
+    {% if teams > 1 %}
+    <th>Teams</th>
+    {% endif %}
+    <th>Player</th>
+    <th>Kills</th>
+    <th>Alive</th>
+    <th>Score</th>
+
+  </tr>
+  {% for x in players %}
+
+  <tr>
+    {% if teams > 1 %}
+    <td><span class = larger>{{x.3}}<span></td>
+    {% endif %}
+      <td><span class = larger><a href = "{% url 'profile' userID=x.1.0 %}">{{ x.0 }}</a><span></td>
+
+    {% for y in x.2 %}
+
+    <td><span class = larger>{{y}}<span></td>
+
+    {%  endfor %}
+
+  </tr>
+
+  {%  endfor %}
+
+</table>
+</scroll>
+<hr>
+</div>
+
+{% include "db/ruleset.html" with extraRules=extraRules killMethod=killMethod safety=safety safetyCircumstances=safetyCircumstances witnessProtection=witnessProtection %}
+</div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

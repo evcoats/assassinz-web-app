@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+  <script src="{% static 'js/loader.js'%}"></script>
+
+
+<body>
+  <div id="page-container">
+     <div id="content-wrap">
+  {% include "db/nav.html" with signedIn=signedIn %}
+
+
+<h3 class = "text-centered"> Submit Your Assassination Evidence (10mb or less) </h3>
+<form method = "post" enctype="multipart/form-data" action="{% url 'killVideoPost' gameID=gameID killerID=killerID targetID=targetID %}" class = "text-centered joingame">
+  {% csrf_token %}
+  <br>
+  <input type="file" id="video" name="video"><br>
+<br>
+  <label for="email" >Allow this video to be used in the compilation?</label>
+  <input type="checkbox" name="compilationUse" value="yes" checked>
+  <br>
+  <input type="submit" value="Confirm Elimation" class = "new" id = "submitKill">
+</form>
+{% if error_message %}
+<p class ="text-centered"> {{ error_message }} </p>
+{%endif%}
+<div class = "loader hidden"></div>
+
+<h3 class = "text-centered flame">Don't have a video yet? Here's how to assassinate your target.</h3>
+<ol>
+{% if killCam %}
+<li>Take a video of your target</li>
+{% endif %}
+<li>{{killMethod}}</li>
+{% if killCam %}
+<li>Submit the video here</li>
+{% endif %}
+</ol>
+</div>
+</div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

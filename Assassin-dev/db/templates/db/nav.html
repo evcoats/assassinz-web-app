@@ -1,0 +1,87 @@
+
+{% load static %}
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YGY9VJXX5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6YGY9VJXX5');
+</script>
+
+<meta name=viewport content="width=device-width, initial-scale=1">
+
+<nav class = "navbar navbar-expand-xl navbar-light">
+
+  <div class = "container-fluid">
+  <a class = "nabar-brand brand-text brandLink" href = "{% url 'index'%}"> <img  id = "brandImg" src = "{% static 'images/logoorgeyes.svg' %}"> ASSASSINZ <span class = "flame small"> by Xegg Studios </span> </a>
+
+  <ul class="nav navbar-nav navbar-right">
+    <div class="collapse navbar-collapse ">
+      <a class = "nav-link navRightLink" href="{% url 'index' %}">
+        <img src = "{% static 'images/home.png' %}" class = "icon">
+
+      </a>
+      {% if signedIn %}
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle navRightLink" href="{% url 'index' %}" id="navbardrop" data-toggle="dropdown">
+
+      <img src = "{% static 'images/play.png' %}" class = "icon">
+      </a>
+
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'index' %}">Your Games</a>
+        <a class="dropdown-item" href="{% url 'joinGame' %}">Join Game</a>
+        <a class="dropdown-item" href="{% url 'startGame' %}">Start Game</a>
+      </div>
+    </li>
+
+    {% endif %}
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle navRightLink" href="#" id="navbardrop" data-toggle="dropdown">  <img src = "{% static 'images/user.png' %}" class = "icon">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+
+        {% if signedIn%}
+        <a class="dropdown-item" href="{% url 'profile' userID=user %}">Profile</a>
+        <a class="dropdown-item" href="{% url 'userSettings' %}">Settings</a>
+        <a class="dropdown-item" href="{% url 'signOut' %}">Sign Out</a>
+
+        {% else %}
+        <a class="dropdown-item" href="{% url 'login' %}">Log In</a>
+        <a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+
+      </div>
+
+    </li>
+
+
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </ul>
+  </div>
+
+</nav>
+
+
+  <div class="accordion-body collapse navbar-collapse"  id = "navbarTogglerDemo01">
+        {% if signedIn%}
+        <a class="dropdown-item lgtext" href="{% url 'index' %}">Your Games</a>
+        <a class="dropdown-item lgtext" href="{% url 'joinGame' %}">Join Game</a>
+      <a class="dropdown-item lgtext" href="{% url 'startGame' %}">Start Game</a>
+         <a class="dropdown-item lgtext" href="{% url 'profile' userID=user %}">Profile</a>
+        <a class="dropdown-item lgtext" href="{% url 'userSettings' %}">Settings</a>
+        <a class="dropdown-item lgtext" href="{% url 'signOut' %}">Sign Out</a>
+        {% else %}
+        <a class="dropdown-item lgtext" href="{% url 'login' %}">Log In</a>
+        <a class="dropdown-item lgtext" href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+      </div>
+      <hr>

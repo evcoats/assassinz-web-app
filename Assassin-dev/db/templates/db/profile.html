@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  {% load static %}
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body>
+  <div id="page-container">
+     <div id="content-wrap">
+  {% include "db/nav.html" %}
+
+<h1 class = "regHeader">{{username}} </h1>
+<h1 class = "smallerHeader text-centered"> Games Won: {{ wins}} </h1>
+<h1 class = "smallerHeader text-centered"> Average Kills Per Game: {{KD}} </h1>
+<h1 class = "smallerHeader text-centered">Games Finished: {{gamecount}} </h1>
+<h1 class = "smallerHeader text-centered">Games Moderated: {{mods}}</h1>
+<h2 class = "smallerheader text-centered">{{username}}'s Games</h2>
+{% if games %}
+{% for x in games %}
+<button class = "game" onclick = "window.location.href='{% url 'game' gameID=x.0 %}'"> Game {{x.1}} / Phase:
+{% if x.2 == 0 %}
+ <span class = "flame">Setup</span> / Players Entered: {{x.3}}
+{% endif %}
+{% if x.2 == 1 %}
+  <span class = "green">Live</span> / Living: {{x.5}} / Dead: {{x.4}}
+{% endif %}
+{% if x.2 == 2 %}
+  Completed
+{% endif %}
+</button>
+{% endfor %}
+{%else%}
+<p class = "text-centered"> No games found </p>
+{% endif%}
+
+</div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div>
+</body>
+</html>

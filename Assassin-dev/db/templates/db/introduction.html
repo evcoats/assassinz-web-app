@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  {% load static %}
+
+  <link href="{% static 'css/css.css'%}" rel='stylesheet' type='text/css'>
+
+<body><div id="page-container">
+   <div id="content-wrap">  {% include "db/nav.html" with signedIn=signedIn user=user %}
+
+<br>
+<div class = "centered textDiv">
+
+  <h5>
+  <b>
+  These are the general rules. To view the rules for a specific game, {% if not signedIn %}<a class = "green" href ="{% url 'login' %}"> Log In</a> or <a class = "green" href ="{% url 'signup'%}"> Sign Up </a> and join a game{% else %}  <a class = "green" href ="{% url 'joinGame'%}">join a game</a> or <a class = "green" href ="{% url 'index'%}">view your current games</a>{% endif%}.
+  </b>
+  <br><br>
+
+  <img id = "ninja" class = "centered" src = "{% static 'images/circle.png'%}">
+
+</h5>
+
+ <h1 class = "regHeader flame" >Introduction</h1>
+
+
+ASSASSINZ, at its core, generates games of stealth, paranoia, creativity, and strategy. It generates games in which wits combine with skills to produce a constantly changing competition of mastery, increasing energy, and connection. Sometimes, the hunt, and the surrounding voting systems and competitions, are as fun as its rewards.
+
+<h1 class = "regHeader flame" >Essentials</h1>
+Zegg Studios hosts variations of AR live-action role-playing games for <b> large-scale games, continuous (respawn) games, team games, and voting systems, </b> which add elements that cannot be effectively implemented without some automated moderation.
+
+In the traditional rules of "Assassins", each player gains one other player as their “target.” 
+
+<br><br>
+
+Each player is hunting down their target while evading their assassin. When a player assassinates their target, they gain their target’s target. The game can end in various ways, including a timer (for respawn games) or one player/team remaining. 
+
+<br><br>
+
+To start a game, you'll need to gather some friends (or enemies).<br><br>
+
+<h1 class = "regHeader flame" >Methods of Hunting</h1>
+<p >How do players gain points, or hunt targets?
+  <br><br>
+
+That is up to the Moderator and the voting players/fans. Artists are particularly good at choosing methods of hunting. Any method MUST be legal within the jurisdiction of the playing field.
+<br><br>
+<b>Examples of Assassination Include:</b>
+<ul>
+<li>Physical: spoons, water guns, and bannanas can all act as proto weapons in the game</li>
+<li>Duels: challenging an opponent to a head-to-head battle in a chosen medium</li>
+<li>Location: if a target enters a trapped location</li>
+<li>Recordings: recording your target entering a trapped gate or using a trapped item</li>
+</ul>
+<br>
+<b>Other Methods of Gaining Points:</b>
+<br>
+
+<ul>
+<li>Location-based events</li>
+<li>Trading points with another player</li>
+<li>Generating proposals for rule changes</li>
+<li>Voting on rule proposals</li>
+</ul>
+
+<br>
+Moderators, players, and fans can choose the methods and won't be confused regarding the competition. Sometimes the game includes recording videos.
+<br><br>
+When a player is assassinated, they and their assassin should click “confirm assassination” and “confirm death” in order to update the game and for the assassin to gain their next target. It is the responsibility of the assassin to make sure that their target confirms their death. If they aren't confirming, the assassin should contact the Moderator.
+<br><br>
+
+</p>
+<h1 class = "regHeader flame">Protection</h1>
+There should be some protection from assassination, whether that be during school or work, at home, or while wearing a floatie.
+<br><br>
+Some players like to play where some number of witnesses (anyone other than assassin and target, including both those not in the game and those in the game) will prevent an assassin from assassinating their target.
+<br><br>
+Overall, too much protection can stop the game from progressing, while too little will make the game less fun. The Moderator initially sets the protection rules, while players can later vote on changes to them.
+<br><br>
+
+<h1 class = "regHeader flame">Prizes</h1>
+
+Some players like to pool resources to create a prize for the champion(s) of the game.
+
+For example, players could compete for an NFT, the rights to select a dinner party, or the ability to Moderate the next game! 
+
+<br><br>
+Of course, each victory will be displayed on a players profile along with their total number of points. 
+
+<br><br>
+
+<h1 class = "regHeader flame"> Moderating </h1>
+  The Moderator runs the game from creation to completion. They can start a game on the home page by clicking <a href = ""> start new game</a>. The Moderator has the ability to choose the rules, set up the game, and manage the game. If two players are arguing about whether one got assassinated or not, the Moderator should gather all the information and can assassinate or reverse the death of any player in the game.
+  <br><br>
+  The Moderator’s job is to make sure that players are following the rules and to keep the game fun, safe, and legal. In addition, they manage proposals which can be approved or denied by the voting players/fans. The Moderator initially sets protection rules while players
+
+  <br><br>
+
+<h1 class = "regHeader flame"> Choosing a Ruleset </h1>
+
+When considering what rules to pick, a Moderator should keep a couple of things in mind:
+<ul>
+<li>How many players are going to play</li>
+<li>How long should the game last</li>
+</ul>
+By changing the rules, a Moderator can optimize around one of these two goals. If the Moderator wants to draw the game out, they should use lots of protection and the “single target” version of the game. If the Moderator wants the game to be quick, they should minimize protection.
+<h1 class = "regHeader flame"> Proposals and Voting </h1>
+
+Players/fans can vote on changes in the game, and add proposals (based on the initial Moderator's input) to change rules within the game. They should consider:
+<ul> 
+<li>Which types of proposals can be added by players/fans (protection, assassination methods, etc)</li>
+<li>How are points weighted in the voting system (do players with lots of points get more votes?)</li>
+<li>How are players rewarded for voting?</li>
+</ul>
+<h1 class = "regHeader flame"> Extra Rules</h1>
+Moderators, players, and fans have the ability to implement extra rules.
+<br><br>
+Zegg does not condone any illegal activity or rules and the site is not liable for any actions you may take while playing the game. Zegg is not liable for any injury, loss, or damage to site users.
+<br><br>
+You are now ready to play or moderate! 
+<div class = "centered standout">
+{% if not signedIn %}
+<button class = "new" onclick = "window.location.href='{% url 'signup'%}'"> <span class = "black" >Join the Hunt </span> <img class = "icon" src = "{% static 'images/play.png' %}"></button>
+{% else %}
+<button class = "new" onclick = "window.location.href='{% url 'startGame'%}'">  Start New Game <img class = "icon" src = "{% static 'images/start.png' %}"></button>
+<button class = "new" onclick = "window.location.href='{% url 'joinGame'%}'"> Join Existing Game <img class = "icon" src = "{% static 'images/join.png' %}"></button>
+<button class = "new" onclick = "window.location.href='{% url 'home'%}'"> Your Games <img class = "icon" src = "{% static 'images/home.png' %}"></button>
+
+{% endif %}
+</div>
+
+  </div>
+{% include "db/footer.html" with signedIn=signedIn %}
+</div></body>
+</html>

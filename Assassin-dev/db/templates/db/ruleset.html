@@ -1,0 +1,80 @@
+
+{% load static %}
+
+<h1 class = "regHeader" id = "rulesetScroll">Rules <img class = "icon" src = "{% static 'images/rules.png'%}"> </h1>
+<br>
+<div class = "centered" style = "width: 70%;">
+  Welcome to ASSASSINZ! In this ruleset, each player has a target to assassinate. Once a player assassinates their target, they will gain the target of the player they assassinated. This process continues until only one player remains, who will then be crowned the champion.
+  <img id = "ninja" class = "centered" src = "{% static 'images/circle_noteams.png'%}">
+
+  
+  <br>
+  <br>
+  <h4>
+  How to assassinate your target:
+  </h4>
+  <ul>
+
+
+  <li> {% if killCam %}While taking a video of your target, {% endif %}{{killMethod}} </li>
+  <li> Go to the game page and click “Confirm Target Assassination” </li>
+  {% if killCam %}
+  <li> Upload the video and decide whether you want the video in the compilation. </li>
+  {% endif %}
+  <li> The player you assassinated should now go to the game page and click “Confirm Your Death.” If they don't, see below. </li>
+  <li> If both players confirm, you will gain the player you assassinated’s target! </li>
+  <li> <b> Important: It is the Assassin's responsibility to make sure that their target confirms their death or that the matter is disputed with the moderator </b> </li>
+
+
+  </ul>
+
+  <br>
+<h4>
+  {% if safety or witnessProtection %}
+  Your assassination isn't valid:
+</h4>
+  <ul>
+
+  {% if witnessProtection %}
+  <li>If <b> more than </b> 1 witness (any person, playing the game or not, who isn't the target or assassin) saw the assassination and is within a 10 foot radius of the target </li>
+  {% endif %}
+  {% if safety %}
+  {% for x in safetyCircumstances %}
+  {% if not x == "" %}
+  <li>{{x}} </li>
+  {% endif %}
+    {%endfor%}
+
+  {% endif %}
+  <br>
+</ul>
+
+  {% endif %}
+  <h5>
+  If your target is not agreeing to confirm their assassination:
+  </h5>
+  <ul>
+  <li> Go to the game page and click “Dispute / Contact Moderator” </li>
+  <li> Provide the moderator with all of the information surrounding the problem and the moderator will make a decision </li>
+  {% if killCam %}
+  <li>The moderator should use your KillCam footage in their decision  </li>
+  {% endif %}
+
+  </ul>
+  <br>
+  <h4>
+  Additionally:
+  </h4>
+  <ul>
+  <li> Refrain from illegal and suspicious activities </li>
+  <li> Refrain from violence in any form</li>
+  <li> Assassin Live is not liable for any players' actions </li>
+
+  {% for x in extraRules %}
+  {% if not x == "" %}
+  <li>{{x}} </li>
+  {% endif %}
+
+  {% endfor %}
+  </ul>
+</div>
