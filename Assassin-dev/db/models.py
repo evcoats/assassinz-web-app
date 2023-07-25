@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
-
 class Profile(models.Model):
     userID = models.IntegerField(default=0)
     KD = models.DecimalField(max_digits=20,decimal_places=2, default=Decimal(0.00))
@@ -87,7 +86,17 @@ class Team(models.Model):
     gameID = models.IntegerField(default=0)
     targetID = models.IntegerField(default=0)
     alive = models.BooleanField(default=True)
+    name = models.CharField(max_length=20,blank= True,null = True)
 
+class Proposal(models.Model):
+    gameID = models.IntegerField(default=0)
+    name = models.CharField(max_length=20,blank= True,null = True)
+    approvedForVoting = models.BooleanField(default=False)
+    desc = models.IntegerField(default=0)
+    votesFor = models.IntegerField(default=0)
+    votesAgainst = models.IntegerField(default=0)
+    timeCreated = models.DateTimeField('time')
+    timeEnding = models.DateTimeField('time')
 
 
 
