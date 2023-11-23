@@ -3,7 +3,7 @@ Project for automating the moderation of large scale games of ["Assassin"](https
 
 AWS Elastic Beanstalk, Django, JavaScript
 
-[Discord Bot Integration](https://github.com/erifyc1/assassin-discord-bot)
+[Discord Bot Integration](https://github.com/erifyc1/assassin-discord-bot) by [erifyc1](https://github.com/erifyc1)
 
 Hosted at The Bishop's School and UIUC
 
